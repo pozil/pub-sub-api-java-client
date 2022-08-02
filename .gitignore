@@ -1,0 +1,10 @@
+**/__MACOSX
+**/.DS_Store
+
+.classpath
+.project
+.settings/
+bin/
+target/
+
+config.properties
