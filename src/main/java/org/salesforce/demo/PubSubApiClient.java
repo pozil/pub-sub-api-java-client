@@ -125,7 +125,7 @@ public class PubSubApiClient {
 		try {
 			client.connect(config);
 			Schema topicSchema = client.retrieveTopicSchema(config.getPubSubTopicName());
-			client.subscribe(config.getPubSubTopicName(), topicSchema, 1);
+			client.subscribe(config.getPubSubTopicName(), topicSchema, config.getPubSubEventReceiveLimit());
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.getMessage(), e);
 		} finally {

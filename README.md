@@ -17,7 +17,8 @@ pubSub.topicName=/data/AccountChangeEvent
 pubSub.eventReceiveLimit=1
 ```
 
-> **Warning:** this project relies on a username/password Salesforce authentication flow. This is only recommended for test purposes. Consider switching to JWT auth for extra security.
+> **Warning**
+> This project relies on a username/password Salesforce authentication flow. This is only recommended for test purposes. Consider switching to JWT auth for extra security.
 
 If using a Change Data Capture topic (like in the sample config), make sure to activate the event in Salesforce Setup > Change Data Capture.
 
