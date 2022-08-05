@@ -1,6 +1,4 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.salesforce.demo</groupId>
 	<artifactId>pubsub-api-demo</artifactId>
@@ -24,6 +22,19 @@
 			</extension>
 		</extensions>
 		<plugins>
+			<plugin>
+				<groupId>kr.motd.maven</groupId>
+				<artifactId>os-maven-plugin</artifactId>
+				<version>1.6.2</version>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>detect</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 			<plugin>
 				<groupId>org.xolstice.maven.plugins</groupId>
 				<artifactId>protobuf-maven-plugin</artifactId>
@@ -94,10 +105,11 @@
 			<version>6.0.53</version>
 			<scope>provided</scope> <!-- not needed at runtime -->
 		</dependency>
-		<dependency> <!-- Used to retrieve Salesforce auth token via SOAP login -->
+		<dependency>
+			<!-- Used to retrieve Salesforce auth token via SOAP login -->
 			<groupId>org.apache.httpcomponents.client5</groupId>
-			  <artifactId>httpclient5</artifactId>
-			  <version>5.1.3</version>
+			<artifactId>httpclient5</artifactId>
+			<version>5.1.3</version>
 		</dependency>
 		<dependency>
 			<groupId>io.grpc</groupId>
