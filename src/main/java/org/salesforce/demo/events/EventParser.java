@@ -6,18 +6,21 @@ import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.List;
 import java.util.ListIterator;
+
 import org.apache.avro.Schema;
 import org.apache.avro.Schema.Type;
 import org.apache.avro.file.SeekableByteArrayInput;
-import org.apache.avro.generic.GenericDatumReader;
-import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.generic.GenericData.Array;
 import org.apache.avro.generic.GenericData.Record;
+import org.apache.avro.generic.GenericDatumReader;
+import org.apache.avro.generic.GenericRecord;
 import org.apache.avro.io.BinaryDecoder;
 import org.apache.avro.io.DatumReader;
 import org.apache.avro.io.DecoderFactory;
 import org.apache.avro.util.Utf8;
 import org.salesforce.demo.events.ChangeEventHeader.ChangeType;
+
+import com.google.protobuf.ByteString;
 import com.salesforce.eventbus.protobuf.ConsumerEvent;
 
 public class EventParser {
@@ -31,7 +34,7 @@ public class EventParser {
 	}
 	
 	public Event parse(ConsumerEvent event) throws EventParseException {
-		long replayId = EventParser.bytesToLong(event.getReplayId().toByteArray());
+		long replayId = EventParser.parseReplayId(event.getReplayId());
 		byte[] avroPayload = event.getEvent().getPayload().toByteArray();
 		SeekableByteArrayInput byteStream = new SeekableByteArrayInput(avroPayload);
 		BinaryDecoder decoder = DecoderFactory.get().binaryDecoder(byteStream, null);
@@ -63,14 +66,18 @@ public class EventParser {
 	}
 
 	/**
-	 * Converts an array of byte into a long
+	 * Parses the value of the replay ID 
 	 * 
-	 * @param bytes
+	 * @param replayIdAsBS
 	 * @return parsed long
+	 * @throws EventParseException 
 	 */
-	private static long bytesToLong(byte[] bytes) {
+	private static long parseReplayId(ByteString replayIdAsBS) throws EventParseException {
+		byte[] bytes = replayIdAsBS.toByteArray();
 		ByteBuffer buffer = ByteBuffer.allocate(Long.BYTES);
-		buffer.put(bytes);
+		for (int i=0; i<Long.BYTES; i++) {
+			buffer.put(bytes[i]);
+		}
 		buffer.flip();
 		return buffer.getLong();
 	}
