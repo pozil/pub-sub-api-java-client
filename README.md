@@ -1,3 +1,7 @@
+> [!IMPORTANT]
+> This project is archived and no longer maintained. Check out the official [Java Pub/Sub API client example](https://github.com/forcedotcom/pub-sub-api/tree/main/java).
+
+
 # Sample Java gRPC client for the Salesforce Pub/Sub API
 
 See the [official Pub/Sub API repo](https://github.com/developerforce/pub-sub-api) for more information on the Pub/Sub API.
